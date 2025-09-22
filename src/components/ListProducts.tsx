@@ -14,9 +14,6 @@ type Shopping = {
 export default function ListProducts() {
   const shoppingList = useSelector((state: any) => state.shoppingList);
   const dispatch = useDispatch();
-  const shopping = useSelector((state: any) => state);
-  console.log(shopping);
-
   const [inputs, setInputs] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
@@ -45,6 +42,7 @@ export default function ListProducts() {
         </h1>
         <div className="products d-flex flex-column gap-4">
           {shoppingList.map((element: Shopping) => {
+            console.log("Product Id : ", element.id);
             return (
               <div key={element.id} className="item d-flex gap-3">
                 <img
@@ -68,9 +66,13 @@ export default function ListProducts() {
                       handleChange(element.id, Number(event.target.value))
                     }
                   />
+
                   <button
                     className="p-1 text-white text-center mt-2"
-                    style={{ backgroundColor: "#FF6634", border: "none" }}
+                    style={{
+                      backgroundColor: "#FF6634",
+                      border: "none",
+                    }}
                     onClick={() =>
                       dispatch({
                         type: "addToCart",
